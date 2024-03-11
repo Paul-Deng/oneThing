@@ -16,6 +16,4 @@ public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);
     }
-
-    // 编写一个用户类，用于绑定该平台下不同的项目使用
 }

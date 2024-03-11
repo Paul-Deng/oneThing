@@ -1,9 +1,9 @@
 package fund.paul.user.serice.impl;
 
 import fund.paul.common.service.impl.SuperServiceImpl;
-import fund.paul.user.bean.SysRole;
-import fund.paul.user.mapper.SysRoleMapper;
-import fund.paul.user.serice.ISysRoleService;
+import fund.paul.user.bean.SysRoles;
+import fund.paul.user.mapper.SysRolesMapper;
+import fund.paul.user.serice.ISysRolesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,32 +16,32 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class SysRoleServiceImpl extends SuperServiceImpl<SysRoleMapper, SysRole> implements ISysRoleService {
+public class SysRolesServiceImpl extends SuperServiceImpl<SysRolesMapper, SysRoles> implements ISysRolesService {
     @Autowired
-    private SysRoleMapper roleMapper;
+    private SysRolesMapper roleMapper;
 
     @Override
-    public int createRole(SysRole role) {
+    public int createRole(SysRoles role) {
         return roleMapper.insert(role);
     }
 
     @Override
-    public int updateRole(SysRole role) {
+    public int updateRole(SysRoles role) {
         return roleMapper.updateById(role);
     }
 
     @Override
-    public int deleteOrDisableRole(SysRole role) {
+    public int deleteOrDisableRole(SysRoles role) {
         return roleMapper.deleteOrDisableRole(role);
     }
 
     @Override
-    public List<SysRole> getAllRoles() {
+    public List<SysRoles> getAllRoles() {
         return roleMapper.getAllRoles();
     }
 
     @Override
-    public List<SysRole> getRolesByIds(List<Long> ids) {
+    public List<SysRoles> getRolesByIds(List<Long> ids) {
         return roleMapper.getRolesByIds(ids);
     }
 }

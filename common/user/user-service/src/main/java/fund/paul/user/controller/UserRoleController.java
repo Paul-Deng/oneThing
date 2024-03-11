@@ -1,7 +1,7 @@
 package fund.paul.user.controller;
 
-import fund.paul.user.bean.SysUserRole;
-import fund.paul.user.serice.ISysUserRoleService;
+import fund.paul.user.bean.SysUsersRoles;
+import fund.paul.user.serice.ISysUsersRolesService;
 import fund.paul.utils.CustomLambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +28,10 @@ import java.util.List;
 @Slf4j
 public class UserRoleController {
     @Autowired
-    private ISysUserRoleService userRoleService;
+    private ISysUsersRolesService userRoleService;
 
     @PostMapping
-    public ResponseEntity<Boolean> createUserRole(@RequestBody SysUserRole userRole) {
+    public ResponseEntity<Boolean> createUserRole(@RequestBody SysUsersRoles userRole) {
         boolean result = userRoleService.saveOrUpdate(userRole);
         if (result) {
             log.info("User-Role relationship created successfully: {}", userRole);
@@ -44,8 +44,8 @@ public class UserRoleController {
 
     @DeleteMapping("/{userId}/{roleId}")
     public ResponseEntity<Boolean> deleteUserRole(@PathVariable("userId") Integer userId, @PathVariable("roleId") Integer roleId) {
-        boolean result = userRoleService.remove(new CustomLambdaQueryWrapper<SysUserRole>()
-                .eq(SysUserRole::getUserId, userId).eq(SysUserRole::getRoleId, roleId));
+        boolean result = userRoleService.remove(new CustomLambdaQueryWrapper<SysUsersRoles>()
+                .eq(SysUsersRoles::getUserId, userId).eq(SysUsersRoles::getRoleId, roleId));
         if (result) {
             log.info("User-Role relationship deleted successfully for userId={}, roleId={}", userId, roleId);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -56,7 +56,7 @@ public class UserRoleController {
     }
 
     @PutMapping("/status")
-    public ResponseEntity<Boolean> updateUserRoleStatus(@RequestBody SysUserRole userRole) {
+    public ResponseEntity<Boolean> updateUserRoleStatus(@RequestBody SysUsersRoles userRole) {
         boolean result = userRoleService.updateById(userRole);
         if (result) {
             log.info("User-Role relationship status updated successfully: {}", userRole);
@@ -68,8 +68,8 @@ public class UserRoleController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<SysUserRole>> getUserRolesByUserId(@PathVariable("userId") Collection<String> userIdSet) {
-        List<SysUserRole> roles = userRoleService.list(new CustomLambdaQueryWrapper<SysUserRole>().in(SysUserRole::getUserId, userIdSet));
+    public ResponseEntity<List<SysUsersRoles>> getUserRolesByUserId(@PathVariable("userId") Collection<String> userIdSet) {
+        List<SysUsersRoles> roles = userRoleService.list(new CustomLambdaQueryWrapper<SysUsersRoles>().in(SysUsersRoles::getUserId, userIdSet));
         log.info("Retrieved user roles for userId={}", userIdSet);
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }

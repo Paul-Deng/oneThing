@@ -1,11 +1,9 @@
 package fund.paul.common.basic;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import lombok.Data;
-
 import java.io.Serial;
+import lombok.Data;
 
 /**
  * 基础模型
@@ -18,12 +16,6 @@ public class BaseModel<T extends Model<?>> extends Model<T> {
 
     @Serial
     private static final long serialVersionUID = -2523019266771621945L;
-
-    /**
-     * 主键ID
-     */
-    @TableId
-    private Long id;
 
     /**
      * 是否被逻辑删除

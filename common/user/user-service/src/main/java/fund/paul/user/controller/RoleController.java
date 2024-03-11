@@ -1,7 +1,7 @@
 package fund.paul.user.controller;
 
-import fund.paul.user.bean.SysRole;
-import fund.paul.user.serice.ISysRoleService;
+import fund.paul.user.bean.SysRoles;
+import fund.paul.user.serice.ISysRolesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,13 +27,13 @@ import java.util.List;
 @Slf4j
 public class RoleController {
     @Autowired
-    private ISysRoleService roleService;
+    private ISysRolesService roleService;
 
     @PostMapping
-    public ResponseEntity<Integer> createRole(@RequestBody SysRole role) {
+    public ResponseEntity<Integer> createRole(@RequestBody SysRoles role) {
         int result = roleService.createRole(role);
         if (result > 0) {
-            log.info("SysRole created successfully: {}", role);
+            log.info("SysRoles created successfully: {}", role);
             return new ResponseEntity<>(result, HttpStatus.CREATED);
         } else {
             log.error("Failed to create role: {}", role);
@@ -42,11 +42,11 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Integer> updateRole(@PathVariable Long id, @RequestBody SysRole role) {
+    public ResponseEntity<Integer> updateRole(@PathVariable Long id, @RequestBody SysRoles role) {
         role.setId(id); // 设置要更新的ID
         int result = roleService.updateRole(role);
         if (result > 0) {
-            log.info("SysRole updated successfully: {}", role);
+            log.info("SysRoles updated successfully: {}", role);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             log.error("Failed to update role: {}", role);
@@ -55,11 +55,11 @@ public class RoleController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> deleteOrDisableRole(@PathVariable Long id, @RequestBody SysRole role) {
+    public ResponseEntity<Integer> deleteOrDisableRole(@PathVariable Long id, @RequestBody SysRoles role) {
         role.setId(id); // 设置要删除或禁用的ID
         int result = roleService.deleteOrDisableRole(role);
         if (result > 0) {
-            log.info("SysRole deleted or disabled successfully: {}", role);
+            log.info("SysRoles deleted or disabled successfully: {}", role);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
             log.error("Failed to delete or disable role: {}", role);
@@ -68,15 +68,15 @@ public class RoleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SysRole>> getAllRoles() {
-        List<SysRole> roles = roleService.getAllRoles();
+    public ResponseEntity<List<SysRoles>> getAllRoles() {
+        List<SysRoles> roles = roleService.getAllRoles();
         log.info("Retrieved all roles");
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }
 
     @GetMapping("/batch")
-    public ResponseEntity<List<SysRole>> getRolesByIds(@RequestParam List<Long> ids) {
-        List<SysRole> roles = roleService.getRolesByIds(ids);
+    public ResponseEntity<List<SysRoles>> getRolesByIds(@RequestParam List<Long> ids) {
+        List<SysRoles> roles = roleService.getRolesByIds(ids);
         log.info("Retrieved roles by IDs: {}", ids);
         return new ResponseEntity<>(roles, HttpStatus.OK);
     }

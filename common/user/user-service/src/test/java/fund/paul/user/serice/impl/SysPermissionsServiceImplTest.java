@@ -1,7 +1,7 @@
 //package fund.paul.user.serice.impl;
 //
 //import cn.hutool.core.lang.Assert;
-//import fund.paul.common.bean.SysPermissions;
+//import fund.paul.user.bean.SysPermissions;
 //import fund.paul.user.serice.ISysPermissionsService;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;

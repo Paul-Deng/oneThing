@@ -1,27 +1,15 @@
-package fund.paul.bean;
+package fund.paul.dto;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import fund.paul.common.basic.BaseModel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+import fund.paul.common.basic.LongPKModel;
 import java.io.Serial;
-import java.io.Serializable;
 
 /**
  * @author paul
- * @date 2024/1/23 01:46
+ * @date 2024/1/30 23:43
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@TableName("tbl_users")
-public class SysUser extends BaseModel<SysUser> implements Serializable {
-
+public class UserDTO extends LongPKModel<UserDTO> {
     @Serial
     private static final long serialVersionUID = 6575103716313132655L;
-
-    // 开放ID，用于标识用户在第三方平台的身份
-    private String openId;
 
     // 用户名，唯一标识用户的登录名
     private String username;

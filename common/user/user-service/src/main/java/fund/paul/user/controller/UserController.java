@@ -1,25 +1,23 @@
 package fund.paul.user.controller;
 
-import fund.paul.api.ISysUserService;
-import fund.paul.bean.SysUser;
+import fund.paul.user.bean.SysUsers;
+import fund.paul.user.serice.ISysUsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
-    private ISysUserService userService;
+    private ISysUsersService userService;
 
     // GET请求获取用户信息
     @GetMapping("/{id}")
-    public SysUser getUser(@PathVariable Long id) {
+    public SysUsers getUser(@PathVariable Long id) {
         return userService.selectUserById(id);
     }
 

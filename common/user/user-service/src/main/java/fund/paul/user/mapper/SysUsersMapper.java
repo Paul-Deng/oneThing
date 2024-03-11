@@ -1,6 +1,6 @@
 package fund.paul.user.mapper;
 
-import fund.paul.bean.SysUser;
+import fund.paul.user.bean.SysUsers;
 import fund.paul.mapper.SuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
@@ -10,13 +10,13 @@ import org.apache.ibatis.annotations.Update;
  * @date 2024/1/23 01:53
  */
 @Mapper
-public interface SysUserMapper extends SuperMapper<SysUser> {
+public interface SysUsersMapper extends SuperMapper<SysUsers> {
     // 更新用户信息，除了密码以外的基本信息可以修改
     @Update({"UPDATE public.tbl_users SET nickname = #{nickname}, gender = #{gender}, email = #{email}, phone = #{phone}, " +
             "avatar = #{avatar}, updatedTime = #{updatedTime}, updatedBy = #{updatedBy} WHERE id = #{id}"})
-    int updateUser(SysUser user);
+    int updateUser(SysUsers user);
 
     // 对用户进行逻辑删除，将deleted字段设置为1
     @Update({"UPDATE public.tbl_users SET deleted = #{deleted}, updated_time = #{updatedTime}, updated_by = #{updatedBy} WHERE id = #{id}"})
-    int deleteUserById(SysUser user);
+    int deleteUserById(SysUsers user);
 }

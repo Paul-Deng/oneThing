@@ -1,10 +1,9 @@
 package fund.paul.user.bean;
 
-import fund.paul.common.basic.BaseModel;
+import fund.paul.common.basic.LongPKModel;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-
 import java.io.Serial;
+import lombok.Data;
 
 /**
  * 系统角色类
@@ -13,7 +12,7 @@ import java.io.Serial;
  * @date 2024/1/23 13:10
  */
 @Data
-public class SysRole extends BaseModel<SysRole> {
+public class SysRoles extends LongPKModel<SysRoles> {
 
     @Serial
     private static final long serialVersionUID = 6639472247341229625L;

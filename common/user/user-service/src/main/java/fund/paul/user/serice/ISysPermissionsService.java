@@ -1,10 +1,10 @@
-package fund.paul.api;
+package fund.paul.user.serice;
 
 import fund.paul.common.service.ISuperService;
 import fund.paul.user.bean.SysPermissions;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 接口类
@@ -28,14 +28,14 @@ public interface ISysPermissionsService extends ISuperService<SysPermissions> {
      * @param roleId
      * @param menuIds
      */
-    void setMenuToRole(Long roleId, Set<Long> menuIds);
+    void setMenuToRole(Long roleId, Collection<Long> menuIds);
 
     /**
      * 角色菜单列表
      * @param roleIds 角色ids
      * @return
      */
-    List<SysPermissions> findByRoles(Set<Long> roleIds);
+    List<SysPermissions> findByRoles(Collection<Long> roleIds);
 
     /**
      * 角色菜单列表
@@ -43,12 +43,12 @@ public interface ISysPermissionsService extends ISuperService<SysPermissions> {
      * @param roleIds 是否菜单
      * @return
      */
-    List<SysPermissions> findByRoles(Set<Long> roleIds, Integer type);
+    List<SysPermissions> findByRoles(Collection<Long> roleIds, Integer type);
 
     /**
      * 角色菜单列表
      * @param roleCodes
      * @return
      */
-    List<SysPermissions> findByRoleCodes(Set<String> roleCodes, Integer type);
+    List<SysPermissions> findByRoleCodes(Collection<String> roleCodes, Integer type);
 }

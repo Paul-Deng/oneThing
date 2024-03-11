@@ -2,11 +2,11 @@ package fund.paul.config;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import fund.paul.properties.MybatisPlusAutoFillProperties;
-import org.apache.ibatis.reflection.MetaObject;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import org.apache.ibatis.reflection.MetaObject;
 
 /**
  * 数据库字段处理
@@ -42,37 +42,30 @@ public class AutoFillFieldMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
-        List<MybatisPlusAutoFillProperties.AutoInsertField> autoFieldList = autoFillProperties.getAutoInsertFieldList();
+        List<MybatisPlusAutoFillProperties.MybatisAutoFiled> autoFieldList =
+                autoFillProperties.getAutoInsertFieldList();
         autoFieldList.addAll(autoFillProperties.getAutoUpdatedFieldList());
-        for (MybatisPlusAutoFillProperties.AutoInsertField fields : autoFieldList) {
+        for (MybatisPlusAutoFillProperties.MybatisAutoFiled fields : autoFieldList) {
             Object fieldVal = getFieldValByName(fields.getFieldName(), metaObject);
             if (ObjectUtil.isEmpty(fieldVal)) {
-                    this.strictInsertFill(metaObject, fields.getFieldName(), LocalDateTime::now, LocalDateTime.class);
+
             }
         }
     }
 
-//    MetaObjectHandler customInsertFill(MetaObject metaObject, String fieldName, Class<?> fieldType, Object val) {
-//        TableInfo tableInfo = this.findTableInfo(metaObject);
-//        Boolean insertFill = autoFillProperties.getEnableInsertFill();
-//        if (insertFill && tableInfo.isWithInsertFill()
-//                || !insertFill && tableInfo.isWithUpdateFill()) {
-//                tableInfo.getFieldList().stream().filter((j) -> {
-//                    return j.getProperty().equals(fieldName) && fieldType.equals(j.getPropertyType()) && (insertFill && j.isWithInsertFill() || !insertFill && j.isWithUpdateFill());
-//                }).findFirst().ifPresent((j) -> {
-//                    this.strictFillStrategy(metaObject, fieldName, () -> val);
-//                });
-//            };
-//        return this;
-//    }
+    MetaObjectHandler customInsertFill(MetaObject metaObject, String fieldName, Class<?> fieldType, Object val) {
+        TableInfo tableInfo = this.findTableInfo(metaObject);
+        Boolean insertFill = autoFillProperties.getEnableInsertFill();
+        return this;
+    }
 
     /**
      * 更新填充
      */
     @Override
     public void updateFill(MetaObject metaObject) {
-        List<MybatisPlusAutoFillProperties.AutoInsertField> autoFieldList = autoFillProperties.getAutoUpdatedFieldList();
-        for (MybatisPlusAutoFillProperties.AutoInsertField autoField : autoFieldList) {
+        List<MybatisPlusAutoFillProperties.MybatisAutoFiled> autoFieldList = autoFillProperties.getAutoUpdatedFieldList();
+        for (MybatisPlusAutoFillProperties.MybatisAutoFiled autoField : autoFieldList) {
             Object fieldVal = getFieldValByName(autoField.getFieldName(), metaObject);
             if (ObjectUtil.isEmpty(fieldVal)) {
                 this.strictUpdateFill(metaObject, autoField.getFieldName(), LocalDateTime::now, LocalDateTime.class);

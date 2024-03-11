@@ -8,13 +8,10 @@ import lombok.Data;
  * @date 2024/1/23 13:28
  */
 @Data
-public class SysUserRole extends BaseModel<SysUserRole> {
+public class SysUsersRoles extends BaseModel<SysUsersRoles> {
     // 用户ID
     private Integer userId;
 
     // 角色ID
     private Integer roleId;
-
-    // 状态：0-禁用；1-启用
-    private boolean status;
 }

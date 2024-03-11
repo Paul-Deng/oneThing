@@ -1,13 +1,12 @@
 package fund.paul.properties;
 
 import cn.hutool.core.collection.ListUtil;
+import java.util.List;
+import java.util.function.Supplier;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-
-import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * mybatis plus 自动填充属性
@@ -35,15 +34,28 @@ public class MybatisPlusAutoFillProperties {
      */
     private Boolean enableUpdateFill = true;
 
-    private List<AutoInsertField> autoInsertFieldList = ListUtil.list(false);
+    /**
+     * 自动插入的字段
+     */
+    private List<MybatisAutoFiled> autoInsertFieldList = ListUtil.list(false);
 
-    private List<AutoInsertField> autoUpdatedFieldList = ListUtil.list(false);
+    /**
+     * 自动更新的字段
+     */
+    private List<MybatisAutoFiled> autoUpdatedFieldList = ListUtil.list(false);
 
     @Setter
     @Getter
-    public class AutoInsertField<T> {
+    public class MybatisAutoFiled {
         private String fieldName;
 
-        private Supplier<T> supplier;
+        private Supplier<?> supplier;
+
+        private Class<?> classType;
+
+
+        public MybatisAutoFiled(String fieldName, String initMethod, String valueType) {
+            this.fieldName = fieldName;
+        }
     }
 }

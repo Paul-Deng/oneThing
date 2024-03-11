@@ -2,14 +2,13 @@ package fund.paul.user.bean;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import fund.paul.common.basic.BaseModel;
+import fund.paul.common.basic.LongPKModel;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import java.io.Serial;
 import java.util.List;
 import java.util.Set;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * 定义权限表
@@ -20,7 +19,7 @@ import java.util.Set;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("tbl_permissions")
-public class SysPermissions extends BaseModel {
+public class SysPermissions extends LongPKModel<SysPermissions> {
 
     @Serial
     private static final long serialVersionUID = 749360940290141180L;
