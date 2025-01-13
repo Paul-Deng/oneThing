@@ -1,13 +1,12 @@
 package fund.paul.common.exception;
 
 import fund.paul.common.basic.Result;
+import java.nio.file.AccessDeniedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.nio.file.AccessDeniedException;
 
 /**
  * 通用异常处理
@@ -70,7 +69,7 @@ public class DefaultExceptionAdvice {
     }
 
     private Result defHandler(String msg, Exception e) {
-        log.error(msg, e);
+//        log.error(msg, e);
         return Result.failed(msg);
     }
 }

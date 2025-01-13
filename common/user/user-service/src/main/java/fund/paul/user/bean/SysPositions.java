@@ -2,7 +2,7 @@ package fund.paul.user.bean;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import fund.paul.common.basic.LongPKModel;
-import lombok.Data;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * @date 2024/1/30 02:07
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Builder
 public class SysPositions extends LongPKModel<SysPositions> {
 
     @TableField("name")

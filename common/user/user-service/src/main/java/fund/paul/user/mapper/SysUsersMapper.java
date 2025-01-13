@@ -1,7 +1,7 @@
 package fund.paul.user.mapper;
 
 import fund.paul.user.bean.SysUsers;
-import fund.paul.mapper.SuperMapper;
+import fund.paul.db.mapper.SuperMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 

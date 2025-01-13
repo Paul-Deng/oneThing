@@ -10,11 +10,14 @@ import java.io.Serial;
  */
 public class BusinessException extends RuntimeException {
 
-
     @Serial
     private static final long serialVersionUID = 516036989851548006L;
 
-    public BusinessException(String message) {
-        super(message);
+    private Integer code;
+
+    private String msg;
+
+    public BusinessException(ExceptionEnum exceptionEnum) {
+        this.code = exceptionEnum.getCode();
     }
 }

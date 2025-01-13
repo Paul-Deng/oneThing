@@ -3,7 +3,11 @@ package fund.paul.common.basic;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.io.Serial;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 
 /**
  * 基础模型
@@ -12,6 +16,9 @@ import lombok.Data;
  * @date 2023/5/18 00:42
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class BaseModel<T extends Model<?>> extends Model<T> {
 
     @Serial

@@ -1,6 +1,6 @@
 package fund.paul.user.mapper;
 
-import fund.paul.mapper.SuperMapper;
+import fund.paul.db.mapper.SuperMapper;
 import fund.paul.user.bean.SysRoles;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;

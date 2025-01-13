@@ -14,7 +14,6 @@ import fund.paul.common.exception.LockException;
 import fund.paul.common.lock.DistributedLock;
 import fund.paul.common.lock.PaulLock;
 import fund.paul.common.service.ISuperService;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;

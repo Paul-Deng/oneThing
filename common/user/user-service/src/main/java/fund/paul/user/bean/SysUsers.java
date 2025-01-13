@@ -1,19 +1,25 @@
 package fund.paul.user.bean;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import fund.paul.common.basic.LongPKModel;
+import fund.paul.common.basic.TenantIdModel;
 import java.io.Serial;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * @author paul
  * @date 2024/1/23 01:46
  */
+@Builder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tbl_users")
-public class SysUsers extends LongPKModel<SysUsers> {
+@NoArgsConstructor
+@AllArgsConstructor
+public class SysUsers extends TenantIdModel<SysUsers> {
 
     @Serial
     private static final long serialVersionUID = 6575103716313132655L;

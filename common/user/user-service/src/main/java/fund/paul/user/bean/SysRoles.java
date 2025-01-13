@@ -3,7 +3,7 @@ package fund.paul.user.bean;
 import fund.paul.common.basic.LongPKModel;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serial;
-import lombok.Data;
+import lombok.Builder;
 
 /**
  * 系统角色类
@@ -11,7 +11,7 @@ import lombok.Data;
  * @author paul
  * @date 2024/1/23 13:10
  */
-@Data
+@Builder
 public class SysRoles extends LongPKModel<SysRoles> {
 
     @Serial

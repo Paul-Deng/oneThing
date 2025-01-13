@@ -1,8 +1,10 @@
 package fund.paul.user.controller;
 
+import fund.paul.db.utils.CustomLambdaQueryWrapper;
 import fund.paul.user.bean.SysUsersRoles;
 import fund.paul.user.serice.ISysUsersRolesService;
-import fund.paul.utils.CustomLambdaQueryWrapper;
+import java.util.Collection;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,9 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.List;
-
 /**
  * @author paul
  * @date 2024/1/23 13:35
@@ -27,6 +26,7 @@ import java.util.List;
 @RequestMapping("/api/userRoles")
 @Slf4j
 public class UserRoleController {
+
     @Autowired
     private ISysUsersRolesService userRoleService;
 

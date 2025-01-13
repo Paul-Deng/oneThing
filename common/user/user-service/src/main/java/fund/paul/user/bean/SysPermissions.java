@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.io.Serial;
 import java.util.List;
 import java.util.Set;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,9 +17,10 @@ import lombok.EqualsAndHashCode;
  * @author paul
  * @date 2023/5/25 23:29
  */
-@Data
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @TableName("tbl_permissions")
+@Data
 public class SysPermissions extends LongPKModel<SysPermissions> {
 
     @Serial

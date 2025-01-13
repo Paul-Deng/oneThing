@@ -9,7 +9,7 @@
 // * @author paul
 // * @date 2024/1/30 02:27
 // */
-//@Data
+//@Builder
 //public class SysOrganizationsPositions extends BaseModel<SysOrganizationsPositions> {
 //    private Long organizationId; // 组织id
 //

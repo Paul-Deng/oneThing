@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import fund.paul.common.basic.BaseModel;
-import lombok.Data;
+import lombok.Builder;
 
 /**
  * 用户权限
@@ -13,7 +13,7 @@ import lombok.Data;
  * @date 2024/1/30 01:52
  */
 @TableName("tbl_user_groups_roles")
-@Data
+@Builder
 public class SysUserGroupRoles extends BaseModel<SysUserGroupRoles> {
     @TableField("roleId")
     private Long roleId;

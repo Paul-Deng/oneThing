@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import fund.paul.common.basic.BaseModel;
+import lombok.Builder;
 
 /**
  * 职位与用户组的关系
@@ -12,6 +13,7 @@ import fund.paul.common.basic.BaseModel;
  * @author paul
  * @date 2024/1/30 02:32
  */
+@Builder
 public class SysPositionUserGroups extends BaseModel<SysPositionUserGroups> {
     @TableId(value = "positionId", type = IdType.INPUT)
     private Long positionId;

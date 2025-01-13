@@ -17,32 +17,47 @@
 
     <properties>
         <revision>1.0.0</revision>
-        <java.version>21</java.version>
+        <log-springboot-starter.v>1.0.0</log-springboot-starter.v>
+        <db-springboot-starter.v>1.0.0</db-springboot-starter.v>
+        <java.v>21</java.v>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+        <maven.v>3.8.6</maven.v>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <sa-token.version>1.37.0</sa-token.version>
-        <springboot-dependencies.version>3.2.2</springboot-dependencies.version>
-        <springcloud-dependencies.version>2023.0.0</springcloud-dependencies.version>
-        <springcloud-alibaba-dependencies.version>2022.0.0.0</springcloud-alibaba-dependencies.version>
-        <xxl-job.version>2.4.0</xxl-job.version>
-        <elasticsearch.version>8.2.0</elasticsearch.version>
-        <hutool.version>5.8.24</hutool.version>
-        <mybaits-plus.version>3.5.5</mybaits-plus.version>
-        <druid.version>1.2.20</druid.version>
-        <postgresql.version>42.6.0</postgresql.version>
-        <jackson-databind.version>2.13.4</jackson-databind.version>
-        <transmittable.version>2.12.1</transmittable.version>
-        <lombok.vesrion>1.18.30</lombok.vesrion>
+        <sa-token.v>1.37.0</sa-token.v>
+        <springboot-dependencies.v>3.2.2</springboot-dependencies.v>
+        <springcloud-dependencies.v>2023.0.0</springcloud-dependencies.v>
+        <springcloud-alibaba-dependencies.v>2022.0.0.0</springcloud-alibaba-dependencies.v>
+        <xxl-job.v>2.4.0</xxl-job.v>
+        <elasticsearch.v>8.2.0</elasticsearch.v>
+        <hutool.v>5.8.24</hutool.v>
+        <mybaits-plus.v>3.5.9</mybaits-plus.v>
+        <mapstruct.v>1.5.5.Final</mapstruct.v>
+        <druid.v>1.2.20</druid.v>
+        <postgresql.v>42.6.0</postgresql.v>
+        <jackson-databind.v>2.13.4</jackson-databind.v>
+        <transmittable.v>2.12.1</transmittable.v>
+        <lombok.v>1.18.36</lombok.v>
+        <crypto.binance.futures.v>3.0.5</crypto.binance.futures.v>
+        <mockito-core.v>3.9.0</mockito-core.v>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito-core.v}</version> <!-- 使用最新版本替换这里的版本号 -->
+                <scope>test</scope>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${springboot-dependencies.version}</version>
+                <version>${springboot-dependencies.v}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -50,7 +65,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${springcloud-dependencies.version}</version>
+                <version>${springcloud-dependencies.v}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -59,7 +74,15 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${springcloud-alibaba-dependencies.version}</version>
+                <version>${springcloud-alibaba-dependencies.v}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-bom</artifactId>
+                <version>${mybaits-plus.v}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -67,57 +90,69 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-validation</artifactId>
-                <version>${springboot-dependencies.version}</version>
+                <version>${springboot-dependencies.v}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
-                <version>${springboot-dependencies.version}</version>
+                <version>${springboot-dependencies.v}</version>
                 <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybaits-plus.version}</version>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybaits-plus.v}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-extension</artifactId>
-                <version>${mybaits-plus.version}</version>
+                <version>${mybaits-plus.v}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-reactor-spring-boot3-starter</artifactId>
-                <version>${sa-token.version}</version>
+                <version>${sa-token.v}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
+                <version>${postgresql.v}</version>
             </dependency>
 
             <!-- druid 官方 starter -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
+                <version>${druid.v}</version>
             </dependency>
 
             <dependency>
                 <groupId>fund.paul</groupId>
                 <artifactId>db-springboot-starter</artifactId>
+                <version>${db-springboot-starter.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fund.paul</groupId>
+                <artifactId>tenant-paul-springboot-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fund.paul</groupId>
+                <artifactId>websocket-paul-springboot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>fund.paul</groupId>
                 <artifactId>log-springboot-starter</artifactId>
-                <version>${revision}</version>
+                <version>${log-springboot-starter.v}</version>
             </dependency>
 
             <dependency>
@@ -135,19 +170,25 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
-                <version>${transmittable.version}</version>
+                <version>${transmittable.v}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>${lombok.vesrion}</version>
+                <version>${lombok.v}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
+                <version>${hutool.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.v}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -159,13 +200,14 @@
         </dependency>
 
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
 
         <dependency>
@@ -177,6 +219,51 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.v}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.v}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>

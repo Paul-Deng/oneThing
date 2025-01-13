@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * 网关的启动类
  *
  * @author paul
- * @date 2023/5/18 13:17
+ * @date 2023/5/18 13:21
  */
 @Configuration
 public class SATokenConfiguration {

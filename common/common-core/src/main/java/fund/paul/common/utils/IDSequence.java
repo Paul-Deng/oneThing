@@ -33,6 +33,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @Slf4j
 public class IDSequence {
+
     /**
      * 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
      */
@@ -139,7 +140,7 @@ public class IDSequence {
                 }
             }
         } catch (Exception e) {
-            log.warn(" getDatacenterId: " + e.getMessage());
+            log.warn("getDatacenterId: " + e.getMessage());
         }
         return id;
     }

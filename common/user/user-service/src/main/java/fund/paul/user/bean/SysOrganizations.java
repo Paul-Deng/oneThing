@@ -3,7 +3,7 @@ package fund.paul.user.bean;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import fund.paul.common.basic.LongPKModel;
-import lombok.Data;
+import lombok.Builder;
 
 /**
  * 系统组织表
@@ -11,7 +11,7 @@ import lombok.Data;
  * @author paul
  * @date 2024/1/30 02:05
  */
-@Data
+@Builder
 @TableName("userservice.tbl_organizations")
 public class SysOrganizations extends LongPKModel<SysOrganizations> {
 

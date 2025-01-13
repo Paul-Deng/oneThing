@@ -1,9 +1,10 @@
 package fund.paul.user.controller;
 
-import fund.paul.api.ISysUserApi;
-import fund.paul.dto.UserDTO;
+import fund.paul.userapi.api.ISysUserApi;
+import fund.paul.common.basic.Result;
+import fund.paul.userapi.dto.UserDTO;
 import fund.paul.user.serice.ISysUsersService;
-import fund.paul.vo.UserVO;
+import fund.paul.userapi.vo.UserVO;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -20,8 +21,10 @@ public class SysUserApiImpl implements ISysUserApi {
     }
 
     @Override
-    public UserDTO addUser(UserDTO userDTO) {
+    public Result<UserDTO> createUser(UserDTO userDTO) {
         
+        // 鉴权，用户是否有权限操作该数据。
+        return Result.succeed(UserDTO.builder().build());
     }
 
     /**
@@ -32,6 +35,6 @@ public class SysUserApiImpl implements ISysUserApi {
      */
     @Override
     public UserVO register(UserVO userVO) {
-        return null;
+        return UserVO.childBuilder().build();
     }
 }

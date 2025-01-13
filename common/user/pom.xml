@@ -28,8 +28,8 @@
         </dependency>
 
         <dependency>
-            <groupId>fund.paul</groupId>
-            <artifactId>common-core</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
         </dependency>
     </dependencies>
 

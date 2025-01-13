@@ -8,17 +8,22 @@
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>${revision}</version>
+    <version>${log-springboot-starter.v}</version>
     <packaging>jar</packaging>
-
     <artifactId>log-springboot-starter</artifactId>
 
     <name>log-springboot-starter</name>
 
     <dependencies>
         <dependency>
-            <groupId>fund.paul</groupId>
-            <artifactId>common-core</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

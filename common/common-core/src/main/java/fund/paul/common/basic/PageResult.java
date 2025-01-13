@@ -13,7 +13,7 @@ import java.util.List;
 public class PageResult<T> implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = -3200176714967829940L;
+    private static final long serialVersionUID = -3200216714967829940L;
 
     /**
      * 总数
