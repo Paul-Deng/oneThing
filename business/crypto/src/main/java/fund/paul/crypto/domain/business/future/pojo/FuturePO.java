@@ -1,8 +1,15 @@
 package fund.paul.crypto.domain.business.future.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import fund.paul.common.basic.LongPKModel;
+import fund.paul.cryptoapi.pojo.Order;
+import java.io.Serial;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.LinkedList;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 合约的对象类
@@ -10,7 +17,15 @@ import java.util.List;
  * @author paul
  * @date 2024/12/12 13:46
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("cryptoservicedb.tbl_order_future")
 public class FuturePO extends LongPKModel<FuturePO> {
+
+    @Serial
+    private static final long serialVersionUID = -6036569770816740668L;
 
     /**
      * 币价值对
@@ -23,6 +38,11 @@ public class FuturePO extends LongPKModel<FuturePO> {
     private BigDecimal avgPrice;
 
     /**
+     * 订单总额
+     */
+    private BigDecimal totalAmount;
+
+    /**
      * 终止价格线
      */
     private BigDecimal slPrice;
@@ -30,17 +50,17 @@ public class FuturePO extends LongPKModel<FuturePO> {
     /**
      * 入场的最高价格
      */
-    private BigDecimal entryMaxPrice;
+    private BigDecimal maxEntryPrice;
 
     /**
      * 入场的最低价格
      */
-    private BigDecimal entryMinPrice;
+    private BigDecimal minEntryPrice;
 
     /**
      * 合约盈利价格
      */
-    private List<BigDecimal> tpPriceList;
+    private LinkedList<BigDecimal> tpPriceList;
 
     /**
      * 本次合约利润
@@ -51,4 +71,11 @@ public class FuturePO extends LongPKModel<FuturePO> {
      * 合约数量
      */
     private BigDecimal count;
+
+    /**
+     * 状态
+     */
+    private Order.Status status;
+
+    private Long parentId;
 }

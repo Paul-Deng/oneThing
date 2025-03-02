@@ -1,6 +1,5 @@
 package fund.paul.common.basic;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +21,5 @@ public class TenantIdModel<T extends Model<?>> extends LongPKModel<T> {
     /**
      * 主键ID
      */
-    @TableId
     private Long tenantId;
 }

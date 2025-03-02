@@ -1,5 +1,11 @@
+-- 创建 schema
+CREATE SCHEMA IF NOT EXISTS userservice;
+
+-- 设置搜索路径
+SET search_path TO userservice;
+    
 -- 用户表
-CREATE TABLE userservice.tbl_users
+CREATE TABLE tbl_users
 (
     id          bigint       NOT NULL PRIMARY KEY,
     openId      VARCHAR(255) NOT NULL, -- 开放id
@@ -19,7 +25,7 @@ CREATE TABLE userservice.tbl_users
 );
 
 -- 角色表
-CREATE TABLE userservice.tbl_roles
+CREATE TABLE tbl_roles
 (
     id          BIGINT      NOT NULL PRIMARY KEY, -- 角色ID
     name        VARCHAR(50) NOT NULL,             -- 角色名称
@@ -33,7 +39,7 @@ CREATE TABLE userservice.tbl_roles
 );
 
 -- 权限表
-CREATE TABLE userservice.tbl_permissions
+CREATE TABLE tbl_permissions
 (
     id          BIGINT       NOT NULL PRIMARY KEY,                      -- 主键ID
     name        VARCHAR(255) NOT NULL,                                  -- 权限名
@@ -56,7 +62,7 @@ CREATE TABLE userservice.tbl_permissions
 );
 
 -- 角色权限关系表
-CREATE TABLE userservice.tbl_role_permissions
+CREATE TABLE tbl_role_permissions
 (
     roleId       BIGINT REFERENCES tbl_roles (id),
     permissionId BIGINT REFERENCES tbl_permissions (id),
@@ -69,7 +75,7 @@ CREATE TABLE userservice.tbl_role_permissions
 );
 
 -- 第三方登录表
-CREATE TABLE userservice.tbl_user_third_party
+CREATE TABLE tbl_user_third_party
 (
     userId      BIGINT REFERENCES tbl_users (id),
     providerId  BIGINT NOT NULL,
@@ -82,7 +88,7 @@ CREATE TABLE userservice.tbl_user_third_party
     createdBy   BIGINT       NOT NULL  -- 被谁创建
 );
 
-CREATE TABLE userservice.tbl_organizations
+CREATE TABLE tbl_organizations
 (
     id          BIGINT       NOT NULL PRIMARY KEY,         -- 主键ID
     name        VARCHAR(255) NOT NULL,                     -- 组织名称
@@ -97,7 +103,7 @@ CREATE TABLE userservice.tbl_organizations
     status      SMALLINT     NOT NULL                      -- 状态：0-禁用；1-启用
 );
 
-CREATE TABLE userservice.tbl_positions
+CREATE TABLE tbl_positions
 (
     id          BIGINT       NOT NULL PRIMARY KEY, -- 主键ID
     name        VARCHAR(255) NOT NULL,             -- 职位名称
@@ -110,7 +116,7 @@ CREATE TABLE userservice.tbl_positions
     createdBy   BIGINT       NOT NULL              -- 被谁创建
 );
 
-    CREATE TABLE userservice.tbl_user_groups
+    CREATE TABLE tbl_user_groups
 (
     id          BIGINT       NOT NULL PRIMARY KEY, -- 主键ID
     name        VARCHAR(255) NOT NULL,             -- 用户组名称
@@ -123,7 +129,7 @@ CREATE TABLE userservice.tbl_positions
     createdBy   BIGINT       NOT NULL              -- 被谁创建
 );
 
-CREATE TABLE userservice.tbl_user_group_users
+CREATE TABLE tbl_user_group_users
 (
     userId         BIGINT REFERENCES tbl_users (id),      -- 用户id
     userGroupId    BIGINT REFERENCES tbl_user_groups (id), --用户组id
@@ -136,7 +142,7 @@ CREATE TABLE userservice.tbl_user_group_users
     createdBy      BIGINT NOT NULL                       -- 被谁创建
 );
 
-    CREATE TABLE userservice.tbl_positions_users
+    CREATE TABLE tbl_positions_users
     (
         userId        BIGINT REFERENCES tbl_users (id),     -- 用户id
         positionId   BIGINT REFERENCES tbl_positions (id), --职位id
@@ -149,7 +155,7 @@ CREATE TABLE userservice.tbl_user_group_users
         createdBy     BIGINT NOT NULL                      -- 被谁创建
     );
 
--- CREATE TABLE userservice.tbl_organizations_positions
+-- CREATE TABLE tbl_organizations_positions
 -- (
 --     organizationId BIGINT REFERENCES tbl_organizations (id), -- 用户id
 --     positionId    BIGINT REFERENCES tbl_positions (id),     --职位id
@@ -162,7 +168,7 @@ CREATE TABLE userservice.tbl_user_group_users
 --     createdBy      BIGINT NOT NULL                          -- 被谁创建
 -- );
 
-CREATE TABLE userservice.tbl_positions_user_group
+CREATE TABLE tbl_positions_user_group
 (
     positionId BIGINT REFERENCES tbl_positions (id), -- 职位id
     userGroupId    BIGINT REFERENCES tbl_user_groups (id),    --用户组id
@@ -176,7 +182,7 @@ CREATE TABLE userservice.tbl_positions_user_group
 );
 
 -- 用户组角色关系表
-CREATE TABLE userservice.tbl_user_groups_roles
+CREATE TABLE tbl_user_groups_roles
 (
     userGroupId      BIGINT REFERENCES tbl_user_groups (id), -- 用户组id
     roleId      BIGINT REFERENCES tbl_roles (id), -- 角色id

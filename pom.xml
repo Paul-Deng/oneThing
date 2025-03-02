@@ -19,13 +19,15 @@
         <revision>1.0.0</revision>
         <log-springboot-starter.v>1.0.0</log-springboot-starter.v>
         <db-springboot-starter.v>1.0.0</db-springboot-starter.v>
+        <satoken-springboot-starter.v>1.0.0</satoken-springboot-starter.v>
+        <redisson.v>3.45.0</redisson.v>
         <java.v>21</java.v>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <maven.v>3.8.6</maven.v>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <sa-token.v>1.37.0</sa-token.v>
+        <sa-token.v>1.40.0</sa-token.v>
         <springboot-dependencies.v>3.2.2</springboot-dependencies.v>
         <springcloud-dependencies.v>2023.0.0</springcloud-dependencies.v>
         <springcloud-alibaba-dependencies.v>2022.0.0.0</springcloud-alibaba-dependencies.v>
@@ -40,6 +42,8 @@
         <transmittable.v>2.12.1</transmittable.v>
         <lombok.v>1.18.36</lombok.v>
         <crypto.binance.futures.v>3.0.5</crypto.binance.futures.v>
+        <crypto-api.v>1.0.0</crypto-api.v>
+        <blackjack-api.v>1.0.0</blackjack-api.v>
         <mockito-core.v>3.9.0</mockito-core.v>
     </properties>
 
@@ -119,6 +123,30 @@
             </dependency>
 
             <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot3-starter</artifactId>
+                <version>${sa-token.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-core</artifactId>
+                <version>${sa-token.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-jackson</artifactId>
+                <version>${sa-token.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.v}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.v}</version>
@@ -139,13 +167,44 @@
 
             <dependency>
                 <groupId>fund.paul</groupId>
+                <artifactId>satoken-paul-springboot-starter</artifactId>
+                <version>${satoken-springboot-starter.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fund.paul</groupId>
+                <artifactId>crypto-api</artifactId>
+                <version>${crypto-api.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fund.paul</groupId>
+                <artifactId>blackjack-api</artifactId>
+                <version>${blackjack-api.v}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fund.paul</groupId>
                 <artifactId>tenant-paul-springboot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>fund.paul</groupId>
+                <artifactId>rpc-paul-springboot-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fund.paul</groupId>
                 <artifactId>websocket-paul-springboot-starter</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>fund.paul</groupId>
+                <artifactId>redis-paul-springboot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -216,6 +275,46 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>custom_group</id>
+            <name>Nexus Repository</name>
+            <url>http://127.0.0.1:10001/repository/custom_group/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>custom_group</id>
+            <name>Nexus Plugin Repository</name>
+            <url>http://127.0.0.1:10001/repository/custom_group/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+    <!--项目分发信息，在执行mvn deploy后表示要发布的位置。有了这些信息就可以把网站部署到远程服务器或者把构件jar等部署到远程仓库。 -->
+    <distributionManagement>
+        <repository><!--部署项目产生的构件到远程仓库需要的信息 -->
+            <id>custom_releases</id><!-- 此处id和settings.xml的id保持一致 -->
+            <name>Nexus Release Repository</name>
+            <url>http://127.0.0.1:10001/repository/custom_releases/</url>
+        </repository>
+        <snapshotRepository><!--构件的快照部署到哪里？如果没有配置该元素，默认部署到repository元素配置的仓库，参见distributionManagement/repository元素 -->
+            <id>custom_snapshots</id><!-- 此处id和settings.xml的id保持一致 -->
+            <name>Nexus Snapshot Repository</name>
+            <url>http://127.0.0.1:10001/repository/custom_snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>

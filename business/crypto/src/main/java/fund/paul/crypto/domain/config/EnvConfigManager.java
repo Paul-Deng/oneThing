@@ -20,23 +20,41 @@ import org.springframework.stereotype.Component;
 @Component
 public class EnvConfigManager {
     public static final Map<String, String> URL_MAP = MapBuilder.<String, String>create()
-            .put(constructKey(ProductType.FUTURE_TEST, ExchangerType.BINANCE, ProtocolType.WSS), ExchangerConstants.Binance.U_TEST_FUTURE_WEBSOCKET_URL)
-            .put(constructKey(ProductType.FUTURE_TEST, ExchangerType.BINANCE, ProtocolType.WSS_API), ExchangerConstants.Binance.U_TEST_FUTURE_WEBSOCKET_API_URL)
-            .put(constructKey(ProductType.SPOT_TEST, ExchangerType.BINANCE, ProtocolType.WSS_API), ExchangerConstants.Binance.SPOT_TEST_WEBSOCKET_API_URL)
-            .put(constructKey(ProductType.SPOT, ExchangerType.BINANCE, ProtocolType.WSS_API), ExchangerConstants.Binance.SPOT_WEBSOCKET_API_URL)
-            .put(constructKey(ProductType.FUTURE, ExchangerType.BINANCE, ProtocolType.WSS), ExchangerConstants.Binance.U_FUTURE_WEBSOCKET_URL)
-            .put(constructKey(ProductType.FUTURE, ExchangerType.BINANCE, ProtocolType.WSS_API), ExchangerConstants.Binance.U_FUTURE_WEBSOCKET_API_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.FUTURE_TEST, ProtocolType.WSS), ExchangerConstants.Binance.U_TEST_FUTURE_WEBSOCKET_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.FUTURE_TEST, ProtocolType.WSS_API), ExchangerConstants.Binance.U_TEST_FUTURE_WEBSOCKET_API_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.SPOT_TEST, ProtocolType.WSS_API), ExchangerConstants.Binance.SPOT_TEST_WEBSOCKET_API_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.SPOT, ProtocolType.WSS_API), ExchangerConstants.Binance.SPOT_WEBSOCKET_API_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.FUTURE, ProtocolType.WSS), ExchangerConstants.Binance.U_FUTURE_WEBSOCKET_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.FUTURE, ProtocolType.WSS_API), ExchangerConstants.Binance.U_FUTURE_WEBSOCKET_API_URL)
             .build();
 
-    public String getWebsocketUrl(ProductType productType, ExchangerType exchangerType, ProtocolType protocolType) {
+    public static final Map<String, String> API_KEY_MAP = MapBuilder.<String, String>create()
+            .put(constructKey(ExchangerType.BINANCE, ProductType.FUTURE_TEST), ExchangerConstants.Binance.U_TEST_FUTURE_WEBSOCKET_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.SPOT_TEST), ExchangerConstants.Binance.SPOT_TEST_WEBSOCKET_API_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.SPOT), ExchangerConstants.Binance.SPOT_WEBSOCKET_API_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.FUTURE), ExchangerConstants.Binance.U_FUTURE_WEBSOCKET_URL)
+            .put(constructKey(ExchangerType.BINANCE, ProductType.FUTURE), "80D0YPTmLyaFUTYptsngrlAVHNz1HTxTAtK8bWjcTi6bYSu81uRn6y3c7lJUYphY")
+            .build();
+
+    public String getWebsocketUrl(ExchangerType exchangerType, ProductType productType, ProtocolType protocolType) {
         if (ObjectUtil.isEmpty(productType) || ObjectUtil.isEmpty(exchangerType) || ObjectUtil.isEmpty(protocolType)) {
             return null;
         }
-        return URL_MAP.get(constructKey(productType, exchangerType, protocolType));
+        return URL_MAP.get(constructKey(exchangerType, productType, protocolType));
     }
 
-    private static String constructKey(ProductType productType, ExchangerType exchangerType, ProtocolType protocolType) {
-        return StrUtil.join(Constants.Characters.AT, ExchangerType.BINANCE.name(), ProtocolType.WSS.name(), ProductType.FUTURE_TEST.name());
+    private static String constructKey(ExchangerType exchangerType, ProductType productType,  ProtocolType protocolType) {
+        return StrUtil.join(Constants.Characters.AT, exchangerType.name(), protocolType.name(), productType.name());
     }
 
+    private static String constructKey(ExchangerType exchangerType, ProductType productType) {
+        return StrUtil.join(Constants.Characters.AT, exchangerType.name(), productType.name());
+    }
+
+    public String getApiKey(ExchangerType exchangerType, ProductType productType) {
+        if (ObjectUtil.isEmpty(productType) || ObjectUtil.isEmpty(exchangerType)) {
+            return null;
+        }
+        return API_KEY_MAP.get(constructKey(exchangerType, productType));
+    }
 }

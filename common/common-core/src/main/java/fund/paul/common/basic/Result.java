@@ -3,6 +3,7 @@ package fund.paul.common.basic;
 import fund.paul.common.constant.CodeEnum;
 import fund.paul.common.exception.ExceptionEnum;
 import java.io.Serializable;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -54,5 +55,10 @@ public class Result<T> implements Serializable {
 
     public static <T> Result<T> failed(T model, String msg) {
         return of(model, CodeEnum.ERROR.getCode(), msg);
+    }
+
+    public static <T> Result<PageResult<T>> succeedByPage(long total, List<T> data) {
+        PageResult<T> pageResult = PageResult.<T>builder().total(total).data(data).build();
+        return of(pageResult, CodeEnum.SUCCESS.getCode(), "");
     }
 }

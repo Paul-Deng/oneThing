@@ -1,76 +1,25 @@
 package fund.paul.crypto.domain.business.future.service;
 
-import fund.paul.common.basic.Result;
-import fund.paul.crypto.domain.business.future.pojo.LimitedDTO;
-import fund.paul.crypto.domain.pojo.ExchangerType;
-import fund.paul.websocket.application.pojo.WssCallback;
-import fund.paul.websocket.domain.pojo.OkWssConnection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
-import okhttp3.Request;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.baomidou.mybatisplus.extension.service.IService;
+import fund.paul.crypto.domain.business.future.pojo.FuturePO;
+import fund.paul.cryptoapi.pojo.OrderRequestParams;
+import java.util.List;
 
 /**
- * 合约的接口
+ * 合约交易的接口类
  *
  * @author paul
  * @date 2024/12/12 13:28
  */
-public interface IFutureService {
-    Logger LOGGER = LoggerFactory.getLogger(IFutureService.class);
+public interface IFutureService extends IService<FuturePO> {
 
-    Map<ExchangerType, LimitedDTO> LIMIT_MAP = new ConcurrentHashMap<>();
+    /**
+     * 获取合约交易的接口
+     *
+     * @param orderRequestParams 订单请求参数
+     * @return 合约列表
+     */
+    public List<FuturePO> list(OrderRequestParams orderRequestParams);
 
-    public String getWebSocketURL();
-
-    public WssCallback getOnMessageCallback();
-
-    public WssCallback getOnClosingCallback();
-
-    public WssCallback getOnOpenCallback();
-
-    public WssCallback getOnFailureCallback();
-
-    public Result sendMsgByWss(Object params);
-
-    public OkWssConnection getOkWssConnection();
-
-    public void setOkWssConnection(OkWssConnection okWssConnection);
-
-    public String getApikey();
-
-    default boolean checkLimit(ExchangerType exchangerType) {
-        if (!LIMIT_MAP.containsKey(exchangerType)) {
-            return true;
-        }
-        return LIMIT_MAP.get(exchangerType).isLimit();
-    }
-
-    default void initLimit(ExchangerType exchangerType) {
-        synchronized (exchangerType) {
-            if (!LIMIT_MAP.containsKey(exchangerType)) {
-                return;
-            }
-            LIMIT_MAP.put(exchangerType, new LimitedDTO(0L,false, TimeUnit.MINUTES.toMillis(3)));
-        }
-    }
-
-    default void trans2Limit(ExchangerType exchangerType) {
-        synchronized (exchangerType) {
-            if (!LIMIT_MAP.containsKey(exchangerType)) {
-                LIMIT_MAP.get(exchangerType).trans2Limit();
-                return;
-            }
-            initLimit(exchangerType);
-        }
-    }
-
-    default void initWebsocket() {
-        Request request  = new Request.Builder().tag(getClass()).url(getWebSocketURL()).build();
-        OkWssConnection okWssConnection = new OkWssConnection(getOnOpenCallback(), getOnMessageCallback(), getOnClosingCallback(), getOnFailureCallback(), request);
-        okWssConnection.connect();
-        setOkWssConnection(okWssConnection);
-    }
+    public Long count(OrderRequestParams orderRequestParams);
 }

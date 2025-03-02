@@ -8,11 +8,12 @@ import java.io.Serial;
  * @author paul
  * @date 2023/5/25 23:37
  */
-public class LockException extends RuntimeException {
+public class LockException extends BusinessException {
+
     @Serial
     private static final long serialVersionUID = 6610083281801529147L;
 
-    public LockException(String message) {
-        super(message);
+    public LockException(ExceptionEnum exceptionEnum) {
+        super(exceptionEnum);
     }
 }

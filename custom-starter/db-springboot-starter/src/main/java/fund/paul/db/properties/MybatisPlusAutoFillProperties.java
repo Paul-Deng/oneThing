@@ -2,8 +2,9 @@ package fund.paul.db.properties;
 
 import cn.hutool.core.collection.ListUtil;
 import java.util.List;
-import java.util.function.Supplier;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -46,16 +47,15 @@ public class MybatisPlusAutoFillProperties {
 
     @Setter
     @Getter
-    public class MybatisAutoFiled {
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class MybatisAutoFiled {
         private String fieldName;
 
-        private Supplier<?> supplier;
+        private String className;
 
-        private Class<?> classType;
+        private String methodName;
 
-
-        public MybatisAutoFiled(String fieldName, String initMethod, String valueType) {
-            this.fieldName = fieldName;
-        }
+        private List<String> params;
     }
 }

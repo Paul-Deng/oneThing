@@ -3,6 +3,9 @@ package fund.paul.common.basic;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 分页实体类
@@ -10,6 +13,9 @@ import java.util.List;
  * @author paul
  * @date 2023/5/18 12:57
  */
+@Builder
+@Setter
+@Getter
 public class PageResult<T> implements Serializable {
 
     @Serial
@@ -18,11 +24,8 @@ public class PageResult<T> implements Serializable {
     /**
      * 总数
      */
-    private Long count;
-    /**
-     * 是否成功：0 成功、1 失败
-     */
-    private int code;
+    private Long total;
+
     /**
      * 当前页结果集
      */

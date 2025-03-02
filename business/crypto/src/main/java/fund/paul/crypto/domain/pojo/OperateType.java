@@ -24,7 +24,6 @@ public enum OperateType {
     // 设定属性
     SET_PROPERTY("SET_PROPERTY"),
 
-
     ;
 
     final String binance;

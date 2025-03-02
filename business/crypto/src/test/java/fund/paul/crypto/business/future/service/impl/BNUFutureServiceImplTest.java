@@ -2,17 +2,13 @@ package fund.paul.crypto.business.future.service.impl;
 
 import fund.paul.crypto.Application;
 import fund.paul.crypto.domain.business.future.pojo.binance.BNRequestDTO;
-import fund.paul.crypto.domain.business.future.service.impl.BNUFutureServiceImpl;
+import fund.paul.crypto.domain.business.future.service.impl.BNUWssConnServiceImpl;
 import fund.paul.crypto.domain.config.EnvConfigManager;
-import fund.paul.crypto.domain.pojo.ExchangerType;
 import fund.paul.crypto.domain.pojo.OperateType;
-import fund.paul.crypto.domain.pojo.ProductType;
-import fund.paul.crypto.domain.pojo.ProtocolType;
 import fund.paul.crypto.domain.pojo.ResType;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,8 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
  */
 @SpringBootTest(classes = {Application.class}, webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class BNUFutureServiceImplTest {
-
-    BNUFutureServiceImplTestClass bnuFutureService = Mockito.mock(BNUFutureServiceImplTestClass.class);
+    @Autowired
+    private BNUWssConnServiceImpl bnuFutureService;
 
     @Autowired
     private EnvConfigManager envConfigManager;
@@ -67,18 +63,5 @@ class BNUFutureServiceImplTest {
 
     @Test
     void getValidSendMsg() {
-    }
-
-
-    private class BNUFutureServiceImplTestClass extends BNUFutureServiceImpl {
-
-        public BNUFutureServiceImplTestClass(EnvConfigManager envConfigManager) {
-            super(envConfigManager);
-        }
-
-        @Override
-        public String getWebSocketURL() {
-            return envConfigManager.getWebsocketUrl(ProductType.FUTURE_TEST, ExchangerType.BINANCE, ProtocolType.WSS);
-        }
     }
 }

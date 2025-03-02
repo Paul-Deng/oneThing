@@ -1,7 +1,7 @@
 package fund.paul.user.controller;
 
-import fund.paul.user.bean.SysRoles;
-import fund.paul.user.serice.ISysRolesService;
+import fund.paul.user.domain.pojo.SysRoles;
+import fund.paul.user.domain.service.ISysRolesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

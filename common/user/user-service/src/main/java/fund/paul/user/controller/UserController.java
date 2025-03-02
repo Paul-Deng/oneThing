@@ -1,38 +1,49 @@
 package fund.paul.user.controller;
 
-import fund.paul.user.bean.SysUsers;
-import fund.paul.user.serice.ISysUsersService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import fund.paul.common.basic.Result;
+import fund.paul.common.constant.SystemConstants;
+import fund.paul.user.domain.pojo.SysUser;
+import fund.paul.user.domain.pojo.convert.UserConvert;
+import fund.paul.user.domain.service.ISysUserService;
+import fund.paul.userapi.api.UserApi;
+import fund.paul.userapi.dto.UserDTO;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
-public class UserController {
-    private final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+@RequestMapping(SystemConstants.ServicePrefix.USER_SERVICE + "/user")
+public class UserController implements UserApi {
 
-    @Autowired
-    private ISysUsersService userService;
+    @Resource
+    private ISysUserService userService;
 
-    // GET请求获取用户信息
-    @GetMapping("/{id}")
-    public SysUsers getUser(@PathVariable Long id) {
-        return userService.selectUserById(id);
+    @Override
+    public Result<UserDTO> getById(Long id) {
+        return Result.succeed(UserConvert.INSTANCE.PO2DTO(userService.getById(id)));
     }
 
-//    // PUT请求更新用户信息
-//    @PutMapping("/{id}")
-//    public int updateUser(@PathVariable Long id, @RequestBody UserDTO dto) {
-//        Long currentUserId = getNowSysSuser();
-//        return userService.updateUser(dto, currentUserId);
-//    }
-//
-//    // DELETE请求逻辑删除用户
-//    @DeleteMapping("/{id}")
-//    public int deleteUser(@PathVariable Long id, @RequestBody UserDTO dto) {
-//        Long currentUserId = // 获取当前操作用户的ID...
-//        return userService.deleteUserById(dto, currentUserId);
-//    }
+    @Override
+    public Result<UserDTO> getByUsername(String username) {
+        return Result.succeed(UserConvert.INSTANCE.PO2DTO(userService.getByUsername(username)));
+    }
+
+    @Override
+    public Result<UserDTO> getByPhone(String phone) {
+        return Result.succeed(UserConvert.INSTANCE.PO2DTO(userService.getByPhone(phone)));
+    }
+
+    @Override
+    public Result<UserDTO> getByEmail(String email) {
+        return Result.succeed(UserConvert.INSTANCE.PO2DTO(userService.getByEmail(email)));
+    }
+
+    @Override
+    public Result<UserDTO> updateUser(UserDTO userDTO) {
+        SysUser user = UserConvert.INSTANCE.DTO2PO(userDTO);
+        userService.updateById(user);
+        return Result.succeed(UserConvert.INSTANCE.PO2DTO(user));
+    }
 }

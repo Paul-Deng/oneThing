@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
 import com.baomidou.mybatisplus.core.toolkit.ReflectionKit;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import fund.paul.common.exception.ExceptionEnum;
 import fund.paul.common.exception.IdempotencyException;
 import fund.paul.common.exception.LockException;
 import fund.paul.common.lock.DistributedLock;
@@ -26,15 +27,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class SuperServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> implements ISuperService<T> {
     @Override
-    public boolean saveIdempotency(T entity, DistributedLock locker, String lockKey,
-                                   Wrapper<T> countWrapper, String msg) throws Exception {
+    public boolean saveIdempotency(T entity, DistributedLock locker, String lockKey, Wrapper<T> countWrapper, String msg, long leaseTime, long waitTime, TimeUnit timeUnit, boolean isFair) throws LockException {
         if (locker == null) {
-            throw new LockException("DistributedLock is null");
+            throw new LockException(ExceptionEnum.CONCURRENT_LOCK_NULL);
         }
         if (StrUtil.isEmpty(lockKey)) {
-            throw new LockException("lockKey is null");
+            throw new LockException(ExceptionEnum.CONCURRENT_LOCK_KEY_NULL);
         }
-        try ( PaulLock lock = locker.tryLock(lockKey, 10, 60, TimeUnit.SECONDS)) {
+        try (PaulLock lock = locker.tryLock(lockKey, waitTime, leaseTime, TimeUnit.SECONDS, isFair)) {
             if (lock != null) {
                 //判断记录是否已存在
                 long count = super.count(countWrapper);
@@ -47,18 +47,15 @@ public class SuperServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M,
                     throw new IdempotencyException(msg);
                 }
             } else {
-                throw new LockException("waiting time out");
+                throw new LockException(ExceptionEnum.CONCURRENT_LOCK_TIME_OUT);
             }
+        } catch (Exception e) {
+            throw new LockException(ExceptionEnum.CONCURRENT_LOCK_FAILED);
         }
     }
 
     @Override
-    public boolean saveIdempotency(T entity, DistributedLock lock, String lockKey, Wrapper<T> countWrapper) throws Exception {
-        return saveIdempotency(entity, lock, lockKey, countWrapper, null);
-    }
-
-    @Override
-    public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Wrapper<T> countWrapper, String msg) throws Exception {
+    public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Wrapper<T> countWrapper, String msg) throws LockException {
         if (null != entity) {
             Class<?> cls = entity.getClass();
             TableInfo tableInfo = TableInfoHelper.getTableInfo(cls);
@@ -80,7 +77,7 @@ public class SuperServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M,
     }
 
     @Override
-    public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Wrapper<T> countWrapper) throws Exception {
+    public boolean saveOrUpdateIdempotency(T entity, DistributedLock lock, String lockKey, Wrapper<T> countWrapper) throws LockException {
         return this.saveOrUpdateIdempotency(entity, lock, lockKey, countWrapper, null);
     }
 }

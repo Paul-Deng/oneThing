@@ -6,6 +6,16 @@ package fund.paul.common.constant;
  */
 public interface Constants {
 
+    interface Col {
+        String UPDATED_TIME = "updatedTime";
+
+        String CREATED_TIME = "createdTime";
+
+        String CREATED_BY = "createdBy";
+
+        String UPDATED_BY = "updatedBy";
+    }
+
     interface SysPermission {
         int TYPE_LEVEL_ONE = 1;
     }
@@ -18,6 +28,8 @@ public interface Constants {
 
     interface Characters {
         String AT = "@";
+
+        String COMMA = ",";
     }
 
     interface Network {

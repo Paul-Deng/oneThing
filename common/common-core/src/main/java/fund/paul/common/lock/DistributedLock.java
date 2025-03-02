@@ -1,5 +1,6 @@
 package fund.paul.common.lock;
 
+import fund.paul.common.exception.LockException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,15 +20,15 @@ public interface DistributedLock {
      * @param isFair 是否公平锁
      * @return 锁对象
      */
-    PaulLock lock(String key, long leaseTime, TimeUnit unit, boolean isFair) throws Exception;
+    PaulLock lock(String key, long leaseTime, TimeUnit unit, boolean isFair) throws LockException;
 
-    default PaulLock lock(String key, long leaseTime, TimeUnit unit) throws Exception {
+    default PaulLock lock(String key, long leaseTime, TimeUnit unit) throws LockException {
         return this.lock(key, leaseTime, unit, false);
     }
-    default PaulLock lock(String key, boolean isFair) throws Exception {
+    default PaulLock lock(String key, boolean isFair) throws LockException {
         return this.lock(key, -1, null, isFair);
     }
-    default PaulLock lock(String key) throws Exception {
+    default PaulLock lock(String key) throws LockException {
         return this.lock(key, -1, null, false);
     }
 
@@ -40,15 +41,15 @@ public interface DistributedLock {
      * @param unit {@code waitTime} 和 {@code leaseTime} 参数的时间单位
      * @return 锁对象，如果获取锁失败则为null
      */
-    PaulLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit, boolean isFair) throws Exception;
+    PaulLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit, boolean isFair) throws LockException;
 
-    default PaulLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit) throws Exception {
+    default PaulLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit) throws LockException {
         return this.tryLock(key, waitTime, leaseTime, unit, false);
     }
-    default PaulLock tryLock(String key, long waitTime, TimeUnit unit, boolean isFair) throws Exception {
+    default PaulLock tryLock(String key, long waitTime, TimeUnit unit, boolean isFair) throws LockException {
         return this.tryLock(key, waitTime, -1, unit, isFair);
     }
-    default PaulLock tryLock(String key, long waitTime, TimeUnit unit) throws Exception {
+    default PaulLock tryLock(String key, long waitTime, TimeUnit unit) throws LockException {
         return this.tryLock(key, waitTime, -1, unit, false);
     }
 
@@ -56,13 +57,13 @@ public interface DistributedLock {
      * 释放锁
      * @param lock 锁对象
      */
-    void unlock(Object lock) throws Exception;
+    void unlock(Object lock) throws LockException;
 
     /**
      * 释放锁
      * @param paulLock 锁抽象对象
      */
-    default void unlock(PaulLock paulLock) throws Exception {
+    default void unlock(PaulLock paulLock) throws LockException {
         if (paulLock != null) {
             this.unlock(paulLock.getLock());
         }

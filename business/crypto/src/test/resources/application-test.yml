@@ -1,0 +1,28 @@
+server:
+  port: 8000 # 端口号
+
+spring:
+  application:
+    name: crypto-service
+  datasource:
+    url: jdbc:h2:mem:cryptoservicedb;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS cryptoservicedb    # 使用内存模式的 H2 数据库，数据库名为 testdb
+    driver-class-name: org.h2.Driver
+    username: sa               # 默认用户名（H2 内置）
+    password:                  # 默认密码为空
+    druid:
+      connect-timeout: 180000
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+
+  h2:
+    console:
+      path: /h2-console  #h2嵌入式数据库控制台，可以通过浏览器访问
+      enabled: true
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启sql日志
+    map-underscore-to-camel-case: false

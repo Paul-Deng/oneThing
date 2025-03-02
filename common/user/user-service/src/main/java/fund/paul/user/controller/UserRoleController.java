@@ -1,8 +1,9 @@
 package fund.paul.user.controller;
 
 import fund.paul.db.utils.CustomLambdaQueryWrapper;
-import fund.paul.user.bean.SysUsersRoles;
-import fund.paul.user.serice.ISysUsersRolesService;
+import fund.paul.user.domain.pojo.SysUsersRoles;
+import fund.paul.user.domain.service.ISysUsersRolesService;
+
 import java.util.Collection;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;

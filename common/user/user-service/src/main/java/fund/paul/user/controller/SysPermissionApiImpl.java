@@ -2,7 +2,8 @@ package fund.paul.user.controller;
 
 import fund.paul.userapi.api.ISysPermissionApi;
 import fund.paul.common.basic.Result;
-import fund.paul.user.serice.ISysPermissionsService;
+import fund.paul.user.domain.service.ISysPermissionsService;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;

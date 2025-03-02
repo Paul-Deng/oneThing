@@ -1,7 +1,8 @@
 package fund.paul.userapi.api;
 
-import fund.paul.userapi.SystemConstants;
 import fund.paul.common.basic.Result;
+import fund.paul.common.constant.SystemConstants;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collection;
 import java.util.Set;
 
-@FeignClient(name = SystemConstants.NAME, path = SystemConstants.PREFIX + "/permission")
+@FeignClient(name = SystemConstants.Service.CRYPTO_SERVICE, path = SystemConstants.ServicePrefix.USER_SERVICE + "/permission")
 public interface ISysPermissionApi {
 
     /**

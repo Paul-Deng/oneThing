@@ -1,18 +1,27 @@
 server:
-  port: 8888 # 端口号
+  port: 8000 # 端口号
 
 spring:
+  application:
+    name: crypto-service
   datasource:
-    url: jdbc:h2:~/mydb  # 数据库
-    driver-class-name: org.h2.Driver
-    username: root
-    password: test
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/cryptoservicedb
+    username: postgres
+    password: 123456
+    druid:
+      connect-timeout: 180000
   h2:
     console:
       path: /h2-console  #h2嵌入式数据库控制台，可以通过浏览器访问
       enabled: true
+  flyway:
+    enabled: true
+    encoding: UTF-8
+    locations: classpath:db/migration
+    validate-on-migrate: true
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启sql日志
-    map-underscore-to-case: true # 开启驼峰映射(mp默认开启)
+    map-underscore-to-camel-case: false

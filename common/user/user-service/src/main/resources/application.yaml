@@ -7,7 +7,7 @@ spring:
     active: dev
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/userservicedb
+    url: jdbc:postgresql://127.0.0.1:5432/userservicedb?currentSchema=userservice
     username: postgres
     password: 123456
     druid:
@@ -17,3 +17,19 @@ spring:
     encoding: UTF-8
     locations: classpath:db/migration
     validate-on-migrate: true
+    baseline-on-migrate: true
+    schemas: userservice
+
+  data:
+    redis:
+      host: localhost
+      database: 0
+      port: 6379
+      timeout: 10000
+
+paul:
+  redis:
+    lock:
+      wait-time: 3000  # 获取锁等待时间，单位毫秒
+      lease-time: 30000  # 锁过期时间，单位毫秒
+      fair: false  # 是否使用公平锁

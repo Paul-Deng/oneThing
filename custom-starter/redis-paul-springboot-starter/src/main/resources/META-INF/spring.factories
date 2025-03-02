@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+fund.paul.redis.config.PaulRedisAutoConfiguration

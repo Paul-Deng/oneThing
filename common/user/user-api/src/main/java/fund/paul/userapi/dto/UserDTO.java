@@ -4,6 +4,8 @@ import fund.paul.common.basic.LongPKModel;
 import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -12,6 +14,8 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Builder
 public class UserDTO extends LongPKModel<UserDTO> {
 

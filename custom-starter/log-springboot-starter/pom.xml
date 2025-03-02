@@ -8,9 +8,9 @@
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>${log-springboot-starter.v}</version>
     <packaging>jar</packaging>
     <artifactId>log-springboot-starter</artifactId>
+    <version>${log-springboot-starter.v}</version>
 
     <name>log-springboot-starter</name>
 
